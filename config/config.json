@@ -1,0 +1,8 @@
+{
+  "url_shortener": {
+    "type": "bitly",
+    "bitly": {
+      "access_token": "60665de96d0f936ce949d5da6feb710cd68a8350"
+    }
+  }
+}
