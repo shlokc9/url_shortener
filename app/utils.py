@@ -8,18 +8,6 @@ __author__ = "Shlok Chaudhari"
 import os
 import json
 import pandas as pd
-from flask import Flask
-
-
-def create_app() -> Flask:
-    """
-        Method to initialize the flask app. It should contain all the flask
-        configuration
-    Returns:
-         Flask: instance of Flask application
-    """
-    flask_app = Flask(__name__)
-    return flask_app
 
 
 def read_config() -> dict:
