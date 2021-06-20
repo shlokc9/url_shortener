@@ -10,6 +10,12 @@ from app import logger, create_app
 from app.url_shortener import URLShortener
 
 
+def error_response(message):
+    logger.exception(message)
+    exp_dict = {"outcome": "failure", "message": message}
+    return exp_dict, 400
+
+
 app = create_app()
 
 
@@ -21,12 +27,25 @@ def convert_long_to_short():
     Return:
          response: shortened URL
     """
-    logger.info("Starting /shorten_url API. Reading the request body")
-    request_body = request.get_json()
+    try:
+        logger.info("Starting /shorten_url API. Reading the request body")
+        request_body = request.get_json()
+    except Exception:
+        return error_response("Unable from request body")
+
     logger.info("Reading the URL from request body")
     given_url = request_body.get("url", None)
-    logger.info("Executing URLShortener module")
-    short_url = URLShortener(given_url).short_url
+    if not given_url:
+        return error_response("Unable to read the URL from request body")
+
+    try:
+        logger.info("Executing URLShortener module")
+        short_url = URLShortener(given_url).short_url
+    except ValueError:
+        return error_response("Received URL from the request is invalid")
+    except KeyError:
+        return error_response("Config file is invalid")
+
     logger.info("Returning the resultant short URL. Completed /shorten_url API")
     success_dict = {
         "outcome": "success",
