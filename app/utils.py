@@ -104,4 +104,3 @@ def get_short_url(url, url_store_df) -> str:
         (str): short URL
     """
     return url_store_df.loc[url_store_df["given_url"] == url, "short_url"].iloc[0]
-
