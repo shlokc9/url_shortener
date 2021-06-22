@@ -31,7 +31,7 @@ def convert_long_to_short():
         logger.info("Starting /shorten_url API. Reading the request body")
         request_body = request.get_json()
     except Exception:
-        return error_response("Unable from request body")
+        return error_response("Unable to fetch request body")
 
     logger.info("Reading the URL from request body")
     given_url = request_body.get("url", None)

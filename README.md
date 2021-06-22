@@ -6,7 +6,7 @@ It is a REST API based application which serves a short URL when a long URL is p
 Following is the pre-built image on docker hub.
 https://hub.docker.com/repository/docker/shlokc/url_shortener_application
 Please use following command to run the image as container.
-docker run -d -p 0.0.0.0:8080:5000 --name url_shortener url_shortener_application:1
+docker run -d -p 0.0.0.0:8080:5000 --name url_shortener shlokc/url_shortener_application:1
 
 Please find API specifications below.
 POST http://0.0.0.0:8080/shorten_url
