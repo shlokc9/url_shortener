@@ -75,9 +75,10 @@ def read_url_store_file() -> pd.DataFrame:
          pd.DataFrame: URL store file as a dataframe
     """
     if os.path.exists("./data/url_store.csv"):
-        return pd.read_csv("./data/url_store.csv", names=["given_url", "short_url"])
+        df = pd.read_csv("./data/url_store.csv", names=["given_url", "short_url"])
     else:
-        return pd.DataFrame(columns=["given_url", "short_url"])
+        df = pd.DataFrame(columns=["given_url", "short_url"])
+    return df.drop_duplicates(keep=False, ignore_index=True)
 
 
 def write_url_store_file(given_url, short_url, url_store_df):
@@ -104,3 +105,15 @@ def get_short_url(url, url_store_df) -> str:
         (str): short URL
     """
     return url_store_df.loc[url_store_df["given_url"] == url, "short_url"].iloc[0]
+
+
+def get_long_url(short_url, url_store_df) -> str:
+    """
+        Fetches long URL using short long URL
+    Args:
+        short_url: short URL string
+        url_store_df: URL store file as dataframe
+    Returns:
+        (str): long URL
+    """
+    return url_store_df.loc[url_store_df["short_url"] == short_url, "given_url"].iloc[0]
