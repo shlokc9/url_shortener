@@ -6,7 +6,6 @@ __author__ = "Shlok Chaudhari"
 
 
 import os
-import json
 import pandas as pd
 from flask import Flask
 
@@ -20,36 +19,6 @@ def create_app() -> Flask:
     """
     flask_app = Flask(__name__)
     return flask_app
-
-
-def read_config() -> dict:
-    """
-        Reads the config file
-    Returns:
-        (dict): config as a dictionary
-    """
-    with open("./config/config.json", 'r') as cfg_fs:
-        config = json.load(cfg_fs)
-    return config
-
-
-def read_selected_service_from_config(config) -> tuple:
-    """
-        Reads the selected service type from the
-        config and returns the service_type string
-        and corresponding access_token string
-    Args:
-        config: config read as a dictionary
-    Returns:
-         (tuple): service_type, access_token
-    """
-    url_shortener_config = config["url_shortener"]
-    service_type = url_shortener_config["type"]
-
-    service_config = url_shortener_config[service_type]
-    access_token = service_config["access_token"]
-
-    return service_type, access_token
 
 
 def is_url_in_store_file(url, url_store_df) -> bool:
