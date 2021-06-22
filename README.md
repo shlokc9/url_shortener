@@ -11,30 +11,33 @@ https://hub.docker.com/repository/docker/shlokc/url_shortener_application
 
 Please use following command to run the image as container.
 
+``` {.sourceCode .bash}
 docker run -d -p 0.0.0.0:8080:5000 --name url_shortener shlokc/url_shortener_application:1
+```
 
 
 Please find API specifications below.
 
+``` {.sourceCode .bash}
 POST http://0.0.0.0:8080/shorten_url
+```
 
 Request payload:
+
+``` {.sourceCode .bash}
 {
-
 	'url': 'http://google.com/'
-
 }
+```
 
 Response:
 
+``` {.sourceCode .bash}
 {
-
-'message': 'Converted the long URL to a short URL',
-
-'outcome': 'success',
-
-'url': 'https://bit.ly/3zELeF6'
-
+	'message': 'Converted the long URL to a short URL',
+	'outcome': 'success',
+	'url': 'https://bit.ly/3zELeF6'
 }
+```
 
 Please note that the application is not SSL-certified.
