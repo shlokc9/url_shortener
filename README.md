@@ -11,7 +11,7 @@ Following is the pre-built image on docker hub.
 
 https://hub.docker.com/repository/docker/shlokc/url_shortener_application
 
-Please use following command to run the image as container.
+Following is the command to run the image as container.
 
 ``` {.sourceCode .bash}
 docker run -d --restart=always \
@@ -23,7 +23,7 @@ docker run -d --restart=always \
 ```
 
 
-Please find API specifications below.
+API specifications:
 
 ``` {.sourceCode .bash}
 POST http://0.0.0.0:8080/short_url
@@ -70,3 +70,5 @@ Response:
 ```
 
 Please note that the application is not SSL-certified.
+
+Thank you :)
