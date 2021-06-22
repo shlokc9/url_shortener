@@ -15,10 +15,10 @@ Please use following command to run the image as container.
 
 ``` {.sourceCode .bash}
 docker run -d --restart=always \
-	-p 0.0.0.0:8080:5000 
-	--name url_shortener 
-	-v /url_shortener_data:/app/data
-	-v /url_shortener_logs:/app/logs
+	-p 0.0.0.0:8080:5000 \
+	--name url_shortener \
+	-v /url_shortener_data:/app/data \
+	-v /url_shortener_logs:/app/logs \
 	shlokc/url_shortener_application:1.1
 ```
 
