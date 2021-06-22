@@ -1,4 +1,4 @@
-# url_shortener
+# URL Shortener
 
 This repository consists of a URL shortener application.
 
