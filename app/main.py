@@ -6,8 +6,9 @@ __author__ = "Shlok Chaudhari"
 
 
 import random
-from flask import request, g
 from app import logger, create_app
+from app.utils import form_short_url
+from flask import request, g, redirect
 from app.url_converter import URLConverter
 
 
@@ -93,6 +94,23 @@ def fetch_long_url():
         "url": long_url
     }
     return success_dict, 200
+
+
+@app.route("/<base62_url_id>", methods=["GET"])
+def redirect_short_url_to_long_url(base62_url_id):
+    """
+        Redirects to the original link
+    Args:
+        base62_url_id: dynamic base62 UID
+    """
+    logger.info("Constructing the short URL")
+    short_url = form_short_url(base62_url_id)
+
+    logger.info("Executing the URLConverter using the short URL")
+    long_url = URLConverter(short_url, g.url_id, operation="expand").url
+
+    logger.info("Redirecting the short URL to corresponding long URL")
+    return redirect(long_url)
 
 
 if __name__ == '__main__':

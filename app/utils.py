@@ -86,3 +86,13 @@ def get_long_url(short_url, url_store_df) -> str:
         (str): long URL
     """
     return url_store_df.loc[url_store_df["short_url"] == short_url, "given_url"].iloc[0]
+
+
+def form_short_url(base62_uid) -> str:
+    """
+        Generates the short URL using the
+        base62 UID
+    Returns:
+        short URL
+    """
+    return f"http://localhost:5000/{base62_uid}"

@@ -12,7 +12,7 @@ from app.utils import is_url_in_store_file, read_url_store_file, \
     write_url_store_file, get_short_url, get_long_url
 
 
-base_link = "https://www.urlshortener.com"
+base_link = "http://localhost:5000"
 possible_url_characters = f"{string.digits}{string.ascii_lowercase}{string.ascii_uppercase}"
 base62 = len(possible_url_characters)
 
