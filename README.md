@@ -27,19 +27,13 @@ API specifications:
 
 ``` {.sourceCode .bash}
 POST http://0.0.0.0:8080/short_url
-```
 
 Request payload:
-
-``` {.sourceCode .bash}
 {
 	'url': 'http://google.com/'
 }
-```
 
 Response:
-
-``` {.sourceCode .bash}
 {
 	'message': 'Converted the long URL to a short URL',
 	'outcome': 'success',
@@ -49,19 +43,13 @@ Response:
 
 ``` {.sourceCode .bash}
 GET http://0.0.0.0:8080/long_url
-```
 
 Request payload:
-
-``` {.sourceCode .bash}
 {
 	'url': 'http://localhost:8080/3zELeF6'
 }
-```
 
 Response:
-
-``` {.sourceCode .bash}
 {
 	'message': 'Fetched long URL using given short URL ',
 	'outcome': 'success',
