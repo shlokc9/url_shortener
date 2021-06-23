@@ -19,7 +19,7 @@ docker run -d --restart=always \
 	--name url_shortener \
 	-v /url_shortener_data:/app/data \
 	-v /url_shortener_logs:/app/logs \
-	shlokc/url_shortener_application:1.1
+	shlokc/url_shortener_application:1.2
 ```
 
 
