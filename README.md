@@ -43,7 +43,7 @@ Response:
 {
 	'message': 'Converted the long URL to a short URL',
 	'outcome': 'success',
-	'url': 'https://bit.ly/3zELeF6'
+	'url': 'http://localhost:8080/3zELeF6'
 }
 ```
 
@@ -55,7 +55,7 @@ Request payload:
 
 ``` {.sourceCode .bash}
 {
-	'url': 'https://bit.ly/3zELeF6'
+	'url': 'http://localhost:8080/3zELeF6'
 }
 ```
 
@@ -68,6 +68,8 @@ Response:
 	'url': 'http://google.com/'
 }
 ```
+
+Redirection to the original URL is also handled when opening the short URL on browser.
 
 Please note that the application is not SSL-certified.
 
