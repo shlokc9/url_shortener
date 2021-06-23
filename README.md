@@ -2,26 +2,9 @@
 
 This repository consists of a URL shortener application.
 
-It is a REST API based application which converts long URL to short URL. It also returns a corresponding long URL for previously converted short URL
+It is a REST API based application which converts long URL to short URL. It also returns a corresponding long URL for previously converted short URL. Redirection to the original URL is also handled when opening the short URL on browser.
 
-There are two APIs that achieve the said functionality.
-
-
-Following is the pre-built image on docker hub.
-
-https://hub.docker.com/repository/docker/shlokc/url_shortener_application
-
-Following is the command to run the image as container.
-
-``` {.sourceCode .bash}
-docker run -d --restart=always \
-	-p 0.0.0.0:8080:5000 \
-	--name url_shortener \
-	-v /url_shortener_data:/app/data \
-	-v /url_shortener_logs:/app/logs \
-	shlokc/url_shortener_application:1.2
-```
-
+PS.: the application is not SSL-certified.
 
 API specifications:
 
@@ -57,8 +40,17 @@ Response:
 }
 ```
 
-Redirection to the original URL is also handled when opening the short URL on browser.
+Pre-built image on docker hub: https://hub.docker.com/repository/docker/shlokc/url_shortener_application
 
-Please note that the application is not SSL-certified.
+Command to run the image as container:
+
+``` {.sourceCode .bash}
+docker run -d --restart=always \
+	-p 0.0.0.0:8080:5000 \
+	--name url_shortener \
+	-v /url_shortener_data:/app/data \
+	-v /url_shortener_logs:/app/logs \
+	shlokc/url_shortener_application:1.2
+```
 
 Thank you :)
