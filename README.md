@@ -53,4 +53,8 @@ docker run -d --restart=always \
 	shlokc/url_shortener_application:1.2
 ```
 
+``` {.sourceCode .bash}
+<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="shlokchaudhari9" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/shlokchaudhari9?trk=profile-badge">Shlok Chaudhari</a></div>
+```
+
 Thank you :)
