@@ -1,5 +1,4 @@
 # URL Shortener
-
 This repository consists of a URL shortener application.
 
 It is a REST API based application which converts long URL to short URL. It also returns a corresponding long URL for previously converted short URL. Redirection to the original URL is also handled when opening the short URL on browser.
