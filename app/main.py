@@ -1,5 +1,5 @@
 """
-    Module to run a flask application that serves an API for an URL shortener
+    Module to run a flask application that serves APIs for URL shortener application
 """
 
 __author__ = "Shlok Chaudhari"

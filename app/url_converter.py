@@ -6,15 +6,13 @@ __author__ = "Shlok Chaudhari"
 __all__ = "URLConverter"
 
 
-import string
 from app import logger
-from app.utils import is_url_in_store_file, read_url_store_file, \
+from app.constants import URLConverterConstants as const
+from app.utils import get_base_url, is_url_in_store_file, read_url_store_file, \
     write_url_store_file, get_short_url, get_long_url
 
 
-base_link = "http://localhost:5000"
-possible_url_characters = f"{string.digits}{string.ascii_lowercase}{string.ascii_uppercase}"
-base62 = len(possible_url_characters)
+BASE_URL = get_base_url()
 
 
 class URLConverter:
@@ -26,9 +24,9 @@ class URLConverter:
         self._url_id = url_id
         logger.info("Reading URL store file")
         url_store_df = read_url_store_file()
-        if operation == "shorten":
+        if operation == const.SHORTEN_OPERATION:
             self._convert_long_to_short(given_url, url_store_df)
-        elif operation == "expand":
+        elif operation == const.EXPAND_OPERATION:
             self._fetch_long_url(given_url, url_store_df)
         else:
             raise TypeError("Given operation is not supported by the URLConverter")
@@ -64,7 +62,7 @@ class URLConverter:
             self._converted_url = get_short_url(long_url, url_store_df)
         else:
             logger.info("URL not present in the store file")
-            self._converted_url = f"{base_link}/{self.convert_base10_to_base62(self._url_id)}"
+            self._converted_url = f"{BASE_URL}/{self.convert_base10_to_base62(self._url_id)}"
             logger.info("Writing new URL record to store file")
             write_url_store_file(long_url, self._converted_url, url_store_df)
 
@@ -80,7 +78,7 @@ class URLConverter:
         logger.info("Converting long URL to short URL")
         result_base62 = []
         while url_id > 0:
-            index = url_id % base62
-            result_base62.append(possible_url_characters[index])
-            url_id = url_id // base62
+            index = url_id % const.BASE62
+            result_base62.append(const.SHORT_URL_CHARACTERS[index])
+            url_id = url_id // const.BASE62
         return "".join(result_base62[::-1])

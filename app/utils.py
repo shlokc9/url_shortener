@@ -6,8 +6,10 @@ __author__ = "Shlok Chaudhari"
 
 
 import os
+import json
 import pandas as pd
 from flask import Flask
+from app.constants import ConstantPaths as path, GenericConstants as const
 
 
 def create_app() -> Flask:
@@ -43,10 +45,10 @@ def read_url_store_file() -> pd.DataFrame:
     Returns:
          pd.DataFrame: URL store file as a dataframe
     """
-    if os.path.exists("./data/url_store.csv"):
-        df = pd.read_csv("./data/url_store.csv", names=["given_url", "short_url"])
+    if os.path.exists(path.URL_FILE_STORE):
+        df = pd.read_csv(path.URL_FILE_STORE, names=[const.GIVEN_URL, const.SHORT_URL])
     else:
-        df = pd.DataFrame(columns=["given_url", "short_url"])
+        df = pd.DataFrame(columns=[const.GIVEN_URL, const.SHORT_URL])
     return df.drop_duplicates(keep=False, ignore_index=True)
 
 
@@ -59,9 +61,9 @@ def write_url_store_file(given_url, short_url, url_store_df):
         short_url: converted short URL
         url_store_df: URL store file as pandas dataframe
     """
-    new_url_data = {"given_url": given_url, "short_url": short_url}
+    new_url_data = {const.GIVEN_URL: given_url, const.SHORT_URL: short_url}
     url_store_df = url_store_df.append(new_url_data, ignore_index=True)
-    url_store_df.to_csv("./data/url_store.csv")
+    url_store_df.to_csv(path.URL_FILE_STORE)
 
 
 def get_short_url(url, url_store_df) -> str:
@@ -73,7 +75,7 @@ def get_short_url(url, url_store_df) -> str:
     Returns:
         (str): short URL
     """
-    return url_store_df.loc[url_store_df["given_url"] == url, "short_url"].iloc[0]
+    return url_store_df.loc[url_store_df[const.GIVEN_URL] == url, const.SHORT_URL].iloc[0]
 
 
 def get_long_url(short_url, url_store_df) -> str:
@@ -85,7 +87,7 @@ def get_long_url(short_url, url_store_df) -> str:
     Returns:
         (str): long URL
     """
-    return url_store_df.loc[url_store_df["short_url"] == short_url, "given_url"].iloc[0]
+    return url_store_df.loc[url_store_df[const.SHORT_URL] == short_url, const.GIVEN_URL].iloc[0]
 
 
 def form_short_url(base62_uid) -> str:
@@ -95,4 +97,15 @@ def form_short_url(base62_uid) -> str:
     Returns:
         short URL
     """
-    return f"http://localhost:5000/{base62_uid}"
+    return f"{get_base_url()}/{base62_uid}"
+
+def get_base_url():
+    """
+        Read configuration file and fetch
+        application service URL
+    Returns:
+        service URL
+    """
+    with open(path.CONFIG) as file_obj:
+        config = json.load(file_obj)
+    return config[const.APP_SERVICE_URL]
